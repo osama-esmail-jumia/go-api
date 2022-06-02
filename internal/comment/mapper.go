@@ -23,10 +23,11 @@ func (m Mapper) ModelToResponse(model comment_i.Model) comment_i.Response {
 		resp.Text = *model.Text
 	}
 	
-	if model.Blog != nil {
-		b := m.blogMapper.ModelToResponse(*model.Blog)
-		resp.Blog = &b
-	}
+	// Circular dependency error
+	//if model.Blog != nil {
+	//	b := m.blogMapper.ModelToResponse(*model.Blog)
+	//	resp.Blog = &b
+	//}
 	
 	return resp
 }
