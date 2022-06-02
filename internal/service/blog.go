@@ -1,19 +1,26 @@
 package service
 
 import (
-	"go-api/definitions/mapper"
-	"go-api/definitions/model"
-	"go-api/definitions/repository"
-	"go-api/definitions/request"
-	"go-api/definitions/response"
+	"go-api/internal/mapper"
+	"go-api/internal/model"
+	"go-api/internal/repository"
+	"go-api/internal/request"
+	"go-api/internal/response"
 )
 
-type Blog struct {
-	repo   repository_i.Blog
-	mapper mapper_i.Blog
+type BlogI interface {
+	Create(create request.BlogCreate) (response.Blog, error)
+	Update(req request.BlogUpdate) (response.Blog, error)
+	Delete(req request.BlogDelete) error
+	List(req request.BlogList) (response.BlogList, error)
 }
 
-func NewBlog(repo repository_i.Blog, mapper mapper_i.Blog) Blog {
+type Blog struct {
+	repo   repository.BlogI
+	mapper mapper.BlogI
+}
+
+func NewBlog(repo repository.BlogI, mapper mapper.BlogI) Blog {
 	return Blog{repo, mapper}
 }
 

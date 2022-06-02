@@ -1,17 +1,22 @@
 package mapper
 
 import (
-	"go-api/definitions/mapper"
-	"go-api/definitions/model"
-	"go-api/definitions/request"
-	"go-api/definitions/response"
+	"go-api/internal/model"
+	"go-api/internal/request"
+	"go-api/internal/response"
 )
 
-type Comment struct {
-	blogMapper mapper_i.Blog
+type CommentI interface {
+	ModelToResponse(model model.Comment) response.Comment
+	ModelToListResponse(model []model.Comment) response.CommentList
+	ListRequestToFilter(req request.CommentList) model.CommentFilter
 }
 
-func NewComment(blogMapper mapper_i.Blog) Comment {
+type Comment struct {
+	blogMapper BlogI
+}
+
+func NewComment(blogMapper BlogI) Comment {
 	return Comment{blogMapper}
 }
 

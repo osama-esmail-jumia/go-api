@@ -1,9 +1,13 @@
 package repository
 
 import (
-	"go-api/definitions/model"
+	"go-api/internal/model"
 	"gorm.io/gorm"
 )
+
+type CommentI interface {
+	List(models *[]model.Comment, filter model.CommentFilter) error
+}
 
 type Comment struct {
 	db *gorm.DB

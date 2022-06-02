@@ -2,8 +2,12 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-api/definitions/request"
+	"go-api/internal/request"
 )
+
+type CommentI interface {
+	List(ctx *gin.Context) (request.CommentList, error)
+}
 
 type Comment struct {
 }

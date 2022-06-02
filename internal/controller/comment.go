@@ -3,18 +3,22 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"go-api/definitions/handler"
-	"go-api/definitions/service"
+	"go-api/internal/handler"
+	"go-api/internal/service"
 	"go-api/pkg/api"
 	"net/http"
 )
 
-type Comment struct {
-	handler handler_i.Comment
-	service service_i.Comment
+type CommentI interface {
+	List(ctx *gin.Context)
 }
 
-func NewComment(handler handler_i.Comment, service service_i.Comment) Comment {
+type Comment struct {
+	handler handler.CommentI
+	service service.CommentI
+}
+
+func NewComment(handler handler.CommentI, service service.CommentI) Comment {
 	return Comment{handler, service}
 }
 

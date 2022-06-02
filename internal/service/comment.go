@@ -1,19 +1,23 @@
 package service
 
 import (
-	"go-api/definitions/mapper"
-	"go-api/definitions/model"
-	"go-api/definitions/repository"
-	"go-api/definitions/request"
-	"go-api/definitions/response"
+	"go-api/internal/mapper"
+	"go-api/internal/model"
+	"go-api/internal/repository"
+	"go-api/internal/request"
+	"go-api/internal/response"
 )
 
-type Comment struct {
-	repo   repository_i.Comment
-	mapper mapper_i.Comment
+type CommentI interface {
+	List(req request.CommentList) (response.CommentList, error)
 }
 
-func NewComment(repo repository_i.Comment, mapper mapper_i.Comment) Comment {
+type Comment struct {
+	repo   repository.CommentI
+	mapper mapper.CommentI
+}
+
+func NewComment(repo repository.CommentI, mapper mapper.CommentI) Comment {
 	return Comment{repo, mapper}
 }
 

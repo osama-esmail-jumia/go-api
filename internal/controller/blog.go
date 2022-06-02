@@ -3,18 +3,25 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"go-api/definitions/handler"
-	"go-api/definitions/service"
+	"go-api/internal/handler"
+	"go-api/internal/service"
 	"go-api/pkg/api"
 	"net/http"
 )
 
-type Blog struct {
-	handler handler_i.Blog
-	service service_i.Blog
+type BlogI interface {
+	Create(ctx *gin.Context)
+	Update(ctx *gin.Context)
+	Delete(ctx *gin.Context)
+	List(ctx *gin.Context)
 }
 
-func NewBlog(handler handler_i.Blog, service service_i.Blog) Blog {
+type Blog struct {
+	handler handler.BlogI
+	service service.BlogI
+}
+
+func NewBlog(handler handler.BlogI, service service.BlogI) Blog {
 	return Blog{handler, service}
 }
 

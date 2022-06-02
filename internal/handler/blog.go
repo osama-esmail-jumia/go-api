@@ -2,8 +2,15 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-api/definitions/request"
+	"go-api/internal/request"
 )
+
+type BlogI interface {
+	Create(ctx *gin.Context) (request.BlogCreate, error)
+	Update(ctx *gin.Context) (request.BlogUpdate, error)
+	Delete(ctx *gin.Context) (request.BlogDelete, error)
+	List(ctx *gin.Context) (request.BlogList, error)
+}
 
 type Blog struct {
 }

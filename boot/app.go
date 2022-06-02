@@ -3,7 +3,6 @@ package boot
 import (
 	"github.com/gin-gonic/gin"
 	"go-api/configs"
-	mapper_i "go-api/definitions/mapper"
 	"go-api/internal/controller"
 	"go-api/internal/handler"
 	"go-api/internal/mapper"
@@ -24,8 +23,8 @@ func AppContainer(cfg configs.App) *gin.Engine {
 	}
 	
 	// init mappers
-	var blogMapper mapper_i.Blog
-	var commentMapper mapper_i.Comment
+	var blogMapper mapper.BlogI
+	var commentMapper mapper.CommentI
 	blogMapper = mapper.NewBlog(commentMapper)
 	commentMapper = mapper.NewComment(blogMapper)
 	
