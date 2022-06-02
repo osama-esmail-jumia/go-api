@@ -1,10 +1,9 @@
 package mapper
 
 import (
+	"go-api/definitions/http_model"
 	"go-api/definitions/mapper"
 	"go-api/definitions/model"
-	"go-api/definitions/request"
-	"go-api/definitions/response"
 )
 
 type Blog struct {
@@ -15,14 +14,14 @@ func NewBlog(commentMapper mapper_i.Comment) Blog {
 	return Blog{commentMapper}
 }
 
-func (m Blog) CreateRequestToModel(req request.BlogCreate) model.Blog {
+func (m Blog) CreateRequestToModel(req http_model.BlogCreateRequest) model.Blog {
 	return model.Blog{
 		Title:       &req.Title,
 		Description: &req.Description,
 	}
 }
 
-func (m Blog) UpdateRequestToModel(req request.BlogUpdate) model.Blog {
+func (m Blog) UpdateRequestToModel(req http_model.BlogUpdateRequest) model.Blog {
 	return model.Blog{
 		ID:          req.ID,
 		Title:       req.Title,
@@ -30,14 +29,14 @@ func (m Blog) UpdateRequestToModel(req request.BlogUpdate) model.Blog {
 	}
 }
 
-func (m Blog) DeleteRequestToModel(req request.BlogDelete) model.Blog {
+func (m Blog) DeleteRequestToModel(req http_model.BlogDeleteRequest) model.Blog {
 	return model.Blog{
 		ID: req.ID,
 	}
 }
 
-func (m Blog) ModelToResponse(model model.Blog) response.Blog {
-	resp := response.Blog{
+func (m Blog) ModelToResponse(model model.Blog) http_model.BlogResponse {
+	resp := http_model.BlogResponse{
 		ID: model.ID,
 	}
 	
@@ -54,16 +53,16 @@ func (m Blog) ModelToResponse(model model.Blog) response.Blog {
 	return resp
 }
 
-func (m Blog) ModelToListResponse(models []model.Blog) response.BlogList {
-	rows := make([]response.Blog, 0, len(models))
-	for _, model := range models {
-		rows = append(rows, m.ModelToResponse(model))
+func (m Blog) ModelToListResponse(models []model.Blog) http_model.BlogListResponse {
+	rows := make([]http_model.BlogResponse, 0, len(models))
+	for _, v := range models {
+		rows = append(rows, m.ModelToResponse(v))
 	}
 	
 	return rows
 }
 
-func (m Blog) ListRequestToFilter(req request.BlogList) model.BlogFilter {
+func (m Blog) ListRequestToFilter(req http_model.BlogListRequest) model.BlogFilter {
 	return model.BlogFilter{
 		Title:       req.Title,
 		Description: req.Description,

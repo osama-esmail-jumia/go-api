@@ -1,11 +1,10 @@
 package service
 
 import (
+	"go-api/definitions/http_model"
 	"go-api/definitions/mapper"
 	"go-api/definitions/model"
 	"go-api/definitions/repository"
-	"go-api/definitions/request"
-	"go-api/definitions/response"
 )
 
 type Blog struct {
@@ -17,7 +16,7 @@ func NewBlog(repo repository_i.Blog, mapper mapper_i.Blog) Blog {
 	return Blog{repo, mapper}
 }
 
-func (s Blog) Create(req request.BlogCreate) (response.Blog, error) {
+func (s Blog) Create(req http_model.BlogCreateRequest) (http_model.BlogResponse, error) {
 	row := s.mapper.CreateRequestToModel(req)
 	err := s.repo.Create(&row)
 	resp := s.mapper.ModelToResponse(row)
@@ -25,7 +24,7 @@ func (s Blog) Create(req request.BlogCreate) (response.Blog, error) {
 	return resp, err
 }
 
-func (s Blog) Update(req request.BlogUpdate) (response.Blog, error) {
+func (s Blog) Update(req http_model.BlogUpdateRequest) (http_model.BlogResponse, error) {
 	row := s.mapper.UpdateRequestToModel(req)
 	err := s.repo.Update(&row)
 	resp := s.mapper.ModelToResponse(row)
@@ -33,7 +32,7 @@ func (s Blog) Update(req request.BlogUpdate) (response.Blog, error) {
 	return resp, err
 }
 
-func (s Blog) Delete(req request.BlogDelete) error {
+func (s Blog) Delete(req http_model.BlogDeleteRequest) error {
 	row := s.mapper.DeleteRequestToModel(req)
 	err := s.repo.Delete(&row)
 	s.mapper.ModelToResponse(row)
@@ -41,7 +40,7 @@ func (s Blog) Delete(req request.BlogDelete) error {
 	return err
 }
 
-func (s Blog) List(req request.BlogList) (response.BlogList, error) {
+func (s Blog) List(req http_model.BlogListRequest) (http_model.BlogListResponse, error) {
 	var rows []model.Blog
 	filter := s.mapper.ListRequestToFilter(req)
 	err := s.repo.List(&rows, filter)

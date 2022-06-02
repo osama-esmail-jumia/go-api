@@ -1,10 +1,9 @@
 package service_i
 
 import (
-	"go-api/definitions/request"
-	"go-api/definitions/response"
+	"go-api/definitions/http_model"
 )
 
 type Comment interface {
-	List(req request.CommentList) (response.CommentList, error)
+	List(req http_model.CommentListRequest) (http_model.CommentListResponse, error)
 }

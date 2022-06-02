@@ -1,13 +1,12 @@
 package service_i
 
 import (
-	"go-api/definitions/request"
-	"go-api/definitions/response"
+	"go-api/definitions/http_model"
 )
 
 type Blog interface {
-	Create(create request.BlogCreate) (response.Blog, error)
-	Update(req request.BlogUpdate) (response.Blog, error)
-	Delete(req request.BlogDelete) error
-	List(req request.BlogList) (response.BlogList, error)
+	Create(create http_model.BlogCreateRequest) (http_model.BlogResponse, error)
+	Update(req http_model.BlogUpdateRequest) (http_model.BlogResponse, error)
+	Delete(req http_model.BlogDeleteRequest) error
+	List(req http_model.BlogListRequest) (http_model.BlogListResponse, error)
 }

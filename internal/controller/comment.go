@@ -3,8 +3,8 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	handler_i "go-api/definitions/handler"
-	service_i "go-api/definitions/service"
+	"go-api/definitions/handler"
+	"go-api/definitions/service"
 	"go-api/pkg/api"
 	"net/http"
 )

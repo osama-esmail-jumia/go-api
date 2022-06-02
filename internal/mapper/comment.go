@@ -1,10 +1,9 @@
 package mapper
 
 import (
-	mapper_i "go-api/definitions/mapper"
+	"go-api/definitions/http_model"
+	"go-api/definitions/mapper"
 	"go-api/definitions/model"
-	"go-api/definitions/request"
-	"go-api/definitions/response"
 )
 
 type Comment struct {
@@ -15,8 +14,8 @@ func NewComment(blogMapper mapper_i.Blog) Comment {
 	return Comment{blogMapper}
 }
 
-func (m Comment) ModelToResponse(model model.Comment) response.Comment {
-	resp := response.Comment{
+func (m Comment) ModelToResponse(model model.Comment) http_model.CommentResponse {
+	resp := http_model.CommentResponse{
 		ID:     model.ID,
 		BlogID: model.BlogID,
 	}
@@ -33,16 +32,16 @@ func (m Comment) ModelToResponse(model model.Comment) response.Comment {
 	return resp
 }
 
-func (m Comment) ModelToListResponse(models []model.Comment) response.CommentList {
-	rows := make([]response.Comment, 0, len(models))
-	for _, model := range models {
-		rows = append(rows, m.ModelToResponse(model))
+func (m Comment) ModelToListResponse(models []model.Comment) http_model.CommentListResponse {
+	rows := make([]http_model.CommentResponse, 0, len(models))
+	for _, v := range models {
+		rows = append(rows, m.ModelToResponse(v))
 	}
 	
 	return rows
 }
 
-func (m Comment) ListRequestToFilter(req request.CommentList) model.CommentFilter {
+func (m Comment) ListRequestToFilter(req http_model.CommentListRequest) model.CommentFilter {
 	return model.CommentFilter{
 		BlogID: req.BlogID,
 		Text:   req.Text,
