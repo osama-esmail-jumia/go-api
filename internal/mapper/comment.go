@@ -1,7 +1,7 @@
 package mapper
 
 import (
-	mapper_i "go-api/definitions/mapper"
+	"go-api/definitions/mapper"
 	"go-api/definitions/model"
 	"go-api/definitions/request"
 	"go-api/definitions/response"
