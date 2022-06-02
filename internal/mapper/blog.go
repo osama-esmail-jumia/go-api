@@ -56,8 +56,8 @@ func (m Blog) ModelToResponse(model model.Blog) response.Blog {
 
 func (m Blog) ModelToListResponse(models []model.Blog) response.BlogList {
 	rows := make([]response.Blog, 0, len(models))
-	for _, model := range models {
-		rows = append(rows, m.ModelToResponse(model))
+	for _, v := range models {
+		rows = append(rows, m.ModelToResponse(v))
 	}
 	
 	return rows

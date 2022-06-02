@@ -35,8 +35,8 @@ func (m Comment) ModelToResponse(model model.Comment) response.Comment {
 
 func (m Comment) ModelToListResponse(models []model.Comment) response.CommentList {
 	rows := make([]response.Comment, 0, len(models))
-	for _, model := range models {
-		rows = append(rows, m.ModelToResponse(model))
+	for _, v := range models {
+		rows = append(rows, m.ModelToResponse(v))
 	}
 	
 	return rows
