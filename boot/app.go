@@ -3,12 +3,10 @@ package boot
 import (
 	"github.com/gin-gonic/gin"
 	"go-api/configs"
-	mapper_i "go-api/definitions/mapper"
-	"go-api/internal/controller"
-	"go-api/internal/handler"
-	"go-api/internal/mapper"
-	"go-api/internal/repository"
-	"go-api/internal/service"
+	"go-api/definitions/blog"
+	"go-api/definitions/comment"
+	"go-api/internal/blog"
+	"go-api/internal/comment"
 	"go-api/pkg/database"
 	"go-api/router"
 )
@@ -24,26 +22,26 @@ func AppContainer(cfg configs.App) *gin.Engine {
 	}
 	
 	// init mappers
-	var blogMapper mapper_i.Blog
-	var commentMapper mapper_i.Comment
-	blogMapper = mapper.NewBlog(commentMapper)
-	commentMapper = mapper.NewComment(blogMapper)
+	var blogMapper blog_i.Mapper
+	var commentMapper comment_i.Mapper
+	blogMapper = blog.NewMapper(commentMapper)
+	commentMapper = comment.NewMapper(blogMapper)
 	
 	// init handlers
-	blogHandler := handler.NewBlog()
-	commentHandler := handler.NewComment()
+	blogHandler := blog.NewHandler()
+	commentHandler := comment.NewHandler()
 	
 	// init repos
-	blogRepo := repository.NewBlog(db)
-	commentRepo := repository.NewComment(db)
+	blogRepo := blog.NewRepository(db)
+	commentRepo := comment.NewRepository(db)
 	
 	// init services
-	blogService := service.NewBlog(blogRepo, blogMapper)
-	commentService := service.NewComment(commentRepo, commentMapper)
+	blogService := blog.NewService(blogRepo, blogMapper)
+	commentService := comment.NewService(commentRepo, commentMapper)
 	
 	// init controllers
-	blogController := controller.NewBlog(blogHandler, blogService)
-	commentController := controller.NewComment(commentHandler, commentService)
+	blogController := blog.NewController(blogHandler, blogService)
+	commentController := comment.NewController(commentHandler, commentService)
 	
 	// init routes
 	apiV1 := engine.Group("/api/v1")

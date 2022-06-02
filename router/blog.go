@@ -2,10 +2,10 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-api/definitions/controller"
+	"go-api/definitions/blog"
 )
 
-func NewBlog(rg *gin.RouterGroup, ctrl controller_i.Blog) {
+func NewBlog(rg *gin.RouterGroup, ctrl blog_i.Controller) {
 	r := rg.Group("blog")
 	
 	r.POST("", ctrl.Create)
