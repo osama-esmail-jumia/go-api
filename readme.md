@@ -31,16 +31,22 @@
 * Mainly called in `/cmd` because it is the first package called and maybe some configs need there to start the command.
 
 ### `/router`
-* TODO
+* Contains the routes for each group
 
 ### `/definitions`
-* TODO
+* Contains all models/entities & interfaces.
+* `Models` have to be inside `definitions` to avoid circular dependencies because `models` are accessed by the interfaces & the internal packages at the same time `interfaces` are accessed in internal package.
 
 ### `/internals`
-* TODO
+* Contains the application logic(controller, handler, service, etc)
+* Subdirectories divided to layers in which they can be access each other in unidirectional to avoid circular dependencies.
+  * `Controller` can call `Handler` & `Service`
+  * `Service` can call `Mapper` & `Repository` & `Clients` & other services.
+
 
 ### `/pkg`
-* TODO
+* Contains all helper packages that is in related to the business logic.
+* They could be published to another repo to be accessed by all go applications.
 
 ### `functional arch` vs `domain arch`
 * `functional arch`
@@ -91,8 +97,9 @@
 
 
 ## `TODO`
+* Migrations files
 * Reading the config from exported env without reading `.env` file
 * Swagger documentation
-* use postgresSQL & containerize it
-* unit tests
+* Use postgresSQL & containerize it
+* Unit tests
 
