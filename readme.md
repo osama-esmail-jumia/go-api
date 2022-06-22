@@ -95,6 +95,10 @@
 * `interface with struct`
   * The opposite of `definitions dir` cons
 
+## References
+* https://github.com/golang-standards/project-layout
+* https://github.com/eddycjy/go-gin-example
+* https://dev.to/resotto/clean-boilerplate-of-go-domain-driven-design-clean-architecture-gin-and-gorm-2825
 
 ## `TODO`
 * Migrations files
