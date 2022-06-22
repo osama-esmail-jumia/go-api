@@ -1,4 +1,4 @@
-package mapper_i
+package mapper
 
 import (
 	"go-api/definitions/model"

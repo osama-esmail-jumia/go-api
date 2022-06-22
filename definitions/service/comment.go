@@ -1,4 +1,4 @@
-package service_i
+package service
 
 import (
 	"go-api/definitions/request"

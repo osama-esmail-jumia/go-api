@@ -1,4 +1,4 @@
-package repository_i
+package repository
 
 import "go-api/definitions/model"
 
