@@ -93,11 +93,7 @@
     * We have to create the same dir hierarchy as in `internal` for the interfaces that are tied to structs(`controllers`, `service`, etc)
     * We may import `pkg/*` structs instead of importing `defenitions/*` 
 * `interface with struct`
-  * pros
-    * The opposite of `definitions dir` cons
-  * cons
-    * We have to postfix/prefix the interface name(`BlogI`)
-    * The opposite of `definitions dir` pros
+  * The opposite of `definitions dir` cons
 
 
 ## `TODO`
