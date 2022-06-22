@@ -1,9 +1,12 @@
 # The arch
 ### `/cmd`
-* Contains all application commands for example
+* Main applications for this project
   * api command to start the API server
   * command to run workers
   * command for migrations
+* Don't put a lot of code in the application directory.
+  * If you think the code can be imported and used in other projects, then it should live in the `/pkg` directory.
+  * If the code is not reusable or if you don't want others to reuse it, put that code in the `/internal` directory.
 * Commands can be grouped in packages for example
 * ```
   api.go
@@ -20,7 +23,7 @@
     * `worker blog update`
     * `worker comment create`
 
-### `/boot`
+### `/boot` or `/init`
 * It works as definitions or container that initialize all dependencies to be injected to each other.
 * It is mainly called in `/boot`
 
@@ -38,6 +41,7 @@
 * `Models` have to be inside `definitions` to avoid circular dependencies because `models` are accessed by the interfaces & the internal packages at the same time `interfaces` are accessed in internal package.
 
 ### `/internals`
+* This is the code you don't want others importing in their applications or libraries.
 * Contains the application logic(controller, handler, service, etc)
 * Subdirectories divided to layers in which they can be access each other in unidirectional to avoid circular dependencies.
   * `Controller` can call `Handler` & `Service`
@@ -45,7 +49,8 @@
 
 
 ### `/pkg`
-* Contains all helper packages that is in related to the business logic.
+* Library code that's ok to use by external applications.
+* Contains all helper packages that is not related to the business logic.
 * They could be published to another repo to be accessed by all go applications.
 
 ### `functional arch` vs `domain arch`
@@ -82,12 +87,11 @@
 ### `definitions dir` vs `interface with struct`
 * `definitions dir`
   * pros
-    * All definitions will be in a separate dir
+    * All definitions will be in a separate dir and can be exported as pkg
     * The interface not tied to one struct (`CRUDController` interface, `Producer` interface, etc)
   * cons
-    * We have to create the same dir hierarchy as in `internal` for the interfaces that are tied to structs(`controllers`, `service_i`, etc)
-    * We have to prefix/postfix the package name to not conflicts with `internal` packages(`controller_i`, `service_i`, etc)
-    * If the dir name differ than the package name(`model & model_i`), the import will auto rename the import to `model_i "./model"` although it is not needed and the lint will warn us.
+    * We have to create the same dir hierarchy as in `internal` for the interfaces that are tied to structs(`controllers`, `service`, etc)
+    * We may import `pkg/*` structs instead of importing `defenitions/*` 
 * `interface with struct`
   * pros
     * The opposite of `definitions dir` cons
