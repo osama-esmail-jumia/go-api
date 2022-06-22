@@ -10,11 +10,11 @@ import (
 )
 
 type Comment struct {
-	handler handler_i.Comment
-	service service_i.Comment
+	handler handler.Comment
+	service service.Comment
 }
 
-func NewComment(handler handler_i.Comment, service service_i.Comment) Comment {
+func NewComment(handler handler.Comment, service service.Comment) Comment {
 	return Comment{handler, service}
 }
 

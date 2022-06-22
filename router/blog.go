@@ -5,7 +5,7 @@ import (
 	"go-api/definitions/controller"
 )
 
-func NewBlog(rg *gin.RouterGroup, ctrl controller_i.Blog) {
+func NewBlog(rg *gin.RouterGroup, ctrl controller.Blog) {
 	r := rg.Group("blog")
 	
 	r.POST("", ctrl.Create)

@@ -10,11 +10,11 @@ import (
 )
 
 type Blog struct {
-	handler handler_i.Blog
-	service service_i.Blog
+	handler handler.Blog
+	service service.Blog
 }
 
-func NewBlog(handler handler_i.Blog, service service_i.Blog) Blog {
+func NewBlog(handler handler.Blog, service service.Blog) Blog {
 	return Blog{handler, service}
 }
 

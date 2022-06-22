@@ -9,11 +9,11 @@ import (
 )
 
 type Blog struct {
-	repo   repository_i.Blog
-	mapper mapper_i.Blog
+	repo   repository.Blog
+	mapper mapper.Blog
 }
 
-func NewBlog(repo repository_i.Blog, mapper mapper_i.Blog) Blog {
+func NewBlog(repo repository.Blog, mapper mapper.Blog) Blog {
 	return Blog{repo, mapper}
 }
 

@@ -8,10 +8,10 @@ import (
 )
 
 type Comment struct {
-	blogMapper mapper_i.Blog
+	blogMapper mapper.Blog
 }
 
-func NewComment(blogMapper mapper_i.Blog) Comment {
+func NewComment(blogMapper mapper.Blog) Comment {
 	return Comment{blogMapper}
 }
 

@@ -9,11 +9,11 @@ import (
 )
 
 type Comment struct {
-	repo   repository_i.Comment
-	mapper mapper_i.Comment
+	repo   repository.Comment
+	mapper mapper.Comment
 }
 
-func NewComment(repo repository_i.Comment, mapper mapper_i.Comment) Comment {
+func NewComment(repo repository.Comment, mapper mapper.Comment) Comment {
 	return Comment{repo, mapper}
 }
 
